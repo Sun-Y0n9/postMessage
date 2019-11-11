@@ -1,12 +1,12 @@
 <template>
-    <div class="iframe">
-      iframe
+    <div class="topNav">
+      
     </div>
 </template>
 
 <script>
 export default {
-    name: 'iframe',
+    name: 'topNav',
     data () {
         return {
          	
@@ -28,5 +28,8 @@ export default {
 </script>
 
 <style scoped type="text/css">
-
+.topNav{
+	height: 70px;
+	background-color: yellowgreen;
+}
 </style>

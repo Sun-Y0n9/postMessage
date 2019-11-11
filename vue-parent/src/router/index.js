@@ -1,17 +1,17 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/Home.vue';
-import Iframe from '../views/iframe.vue';
+import Iframes from '../views/Iframes.vue';
 Vue.use(VueRouter);
 const routes = [
 	{
 		path: '/',
 		name: 'home',
-		components: Home
+		component: Home
 	}, {
-		path: '/iframe',
-		name: 'iframe',
-		components: Iframe
+		path: '/iframes',
+		name: 'iframes',
+		component: Iframes
 	}
 ];
 const router = new VueRouter({
