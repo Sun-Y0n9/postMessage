@@ -1,6 +1,16 @@
 <template>
     <div class="iframes">
-      iframe
+        <div class="top">
+            <top-nav></top-nav>
+        </div>
+        <div class="bot">
+            <div class="bot-left">
+                <left-nav></left-nav>
+            </div>
+            <div class="bot-right">
+               
+            </div>
+        </div>
     </div>
 </template>
 
@@ -28,5 +38,18 @@ export default {
 </script>
 
 <style scoped type="text/css">
-
+.iframes{
+    height: 100%;
+}
+.bot{
+    height: calc(100% - 70px);
+    display: flex;
+}
+.bot-left{
+    height: 100%;
+}
+.bot-right{
+    width: calc(100% - 180px);
+    padding: 10px;
+}
 </style>

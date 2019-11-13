@@ -1,8 +1,19 @@
 <template>
     <div class="leftNav">
       <ul>
-          <router-link tag='li' to='/'>主页</router-link tag='li' to='/'>
-          <router-link tag='li' to='/iframes'>配置页</router-link tag='li' to='/'>
+            <router-link
+                tag='li'
+                :class='{linkActive: curRouter == "home"}'
+                to='/'>
+                主页
+            </router-link>
+            <router-link
+                tag='li'
+                v-if='$route.path === "/iframes"'
+                :class='{linkActive: curRouter == "iframes"}'
+                to='/iframes'>
+                配置页
+            </router-link>
       </ul>
     </div>
 </template>
@@ -12,20 +23,11 @@ export default {
     name: 'leftNav',
     data () {
         return {
-         	
+         	curRouter: 'home'
         }
     },
-    methods:{
-    
-    },
-    components:{
-
-    },
     created(){
-    
-    },
-    mounted(){
-    
+        this.curRouter = this.$route.name;
     }
 }
 </script>
@@ -44,7 +46,7 @@ li{
     cursor: pointer;
     font-size: 16px;
 }
-.router-link-exact-active.router-link-active{
+.linkActive{
     background-color: #20b1aa;
 }
 </style>
