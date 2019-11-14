@@ -26,7 +26,7 @@ export default {
     mounted(){
         let xmIframe = this.$refs['xmIframe'];
         xmIframe.addEventListener('load', () => {
-            // iframe加载后, 向iframe发送请求参数
+            // iframe加载后, 向iframe发送参数
             let iframeWin = xmIframe.contentWindow;
             iframeWin.postMessage({
                 method: 'xmParams',

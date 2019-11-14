@@ -66,15 +66,18 @@ export default {
   methods: {
     save () {
       this.model = true;
+      // 调整弹出框的位置
       let dialog = document.getElementsByClassName('confirm')[0];
       dialog.style.left = 'calc(50% - ' + this.offset.width / 2 + 'px)';
       dialog.style.top = 'calc(50% - ' + this.offset.height / 2 + 'px)';
+      // 通知父级显示背景层
       window.parent.postMessage({
         method: 'showBg',
       }, '*');
     },
     cancel () {
       this.model = false;
+      // 通知父级, 隐藏背景层
       window.parent.postMessage({
         method: 'hideBg',
       }, '*');
@@ -82,6 +85,7 @@ export default {
     confirmSave () {
       this.model = false;
       console.log('发送数据');
+      // 通知父级, 隐藏背景层
       window.parent.postMessage({
         method: 'hideBg',
       }, '*');
