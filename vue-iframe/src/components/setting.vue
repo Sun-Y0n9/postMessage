@@ -1,7 +1,10 @@
 <template>
   <div class="setting">
-    <div class='curId' v-show='id != ""'>此设备的id为{{id}}</div>
-    <form action="/">
+    <div class='curId' v-show='!!deviceId'>
+      此设备的设备id为: {{deviceId}}
+    </div>
+    <div>
+       <form action="#">
       <div class='form-item'>
         <label for="s1">设置1</label>
         <input type="text" id='s1'>
@@ -31,9 +34,19 @@
         </select>
       </div>
       <div class='form-item'>
-        <button>保存</button>
+        <button type='button' @click='save'>保存</button>
       </div>
     </form>
+    </div>
+    <div class="confirm_wrapper" v-show='model'>
+      <div class="confirm">
+        <p>是否确认保存?</p>
+        <div>
+          <button @click='cancel'>取消</button>
+          <button @click='confirmSave'>保存</button>
+        </div>
+      </div>      
+    </div>
   </div>
 </template>
 
@@ -42,17 +55,89 @@ export default {
   name: 'setting',
   data () {
     return {
-      id: ''
+      deviceId: '',
+      model: false,
+      offset: {
+        width: 0,
+        height: 0
+      }
     }
   },
-  created () {
-    this.id = this.$router.query.id;
+  methods: {
+    save () {
+      this.model = true;
+      let dialog = document.getElementsByClassName('confirm')[0];
+      dialog.style.left = 'calc(50% - ' + this.offset.width / 2 + 'px)';
+      dialog.style.top = 'calc(50% - ' + this.offset.height / 2 + 'px)';
+      window.parent.postMessage({
+        method: 'showBg',
+      }, '*');
+    },
+    cancel () {
+      this.model = false;
+      window.parent.postMessage({
+        method: 'hideBg',
+      }, '*');
+    },
+    confirmSave () {
+      this.model = false;
+      console.log('发送数据');
+      window.parent.postMessage({
+        method: 'hideBg',
+      }, '*');
+      return false;
+    },
+    getOldCfg (did) {
+      console.log('通过获取的设备id: ' + did + ',请求当前设备的配置信息');
+    }
+  },
+  mounted () {
+    window.addEventListener('message', (e) => {
+      if (e.data.method === 'xmParams') {
+        this.deviceId = e.data.data.deviceId;// 本地保存设备id
+        this.getOldCfg(this.deviceId);// 获取设备当前的配置, 进行展示
+      } else if (e.data.method === 'navSize') {
+        this.offset = e.data.data; // 本地存储
+      }
+    });
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+.confirm_wrapper{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.confirm{
+  position: fixed;
+  width: 400px;
+  height: 200px;
+  left: 50%;
+  top: 50%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  background-color: #fff;
+}
+.confirm p{
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.confirm button{
+  width: 60px;
+  height: 30px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
 .curId{
   text-align: center;
 }

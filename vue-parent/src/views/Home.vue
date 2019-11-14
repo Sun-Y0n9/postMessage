@@ -8,7 +8,6 @@
                 <left-nav></left-nav>
             </div>
             <div class="bot-right">
-                <!-- <button>配置一下</button> -->
                 <table>
                     <thead>
                         <tr>
@@ -41,27 +40,27 @@ export default {
         return {
          	tableData: [
                 {
-                    id: 1,
+                    deviceId: 1,
                     name: '设备1',
                     addr: '北京东城',
                     phone: '15056565690'
                 }, {
-                    id: 2,
+                    deviceId: 2,
                     name: '设备2',
                     addr: '北京西城',
                     phone: '13545456963'
                 }, {
-                    id: 3,
+                    deviceId: 3,
                     name: '设备3',
                     addr: '北京朝阳',
                     phone: '15147478565'
                 }, {
-                    id: 4,
+                    deviceId: 4,
                     name: '设备4',
                     addr: '北京昌平',
                     phone: '13472226836'
                 }, {
-                    id: 5,
+                    deviceId: 5,
                     name: '设备5',
                     addr: '北京海淀',
                     phone: '18745957545'
@@ -74,7 +73,7 @@ export default {
             this.$router.push({
                 path: 'iframes',
                 query: {
-                    id: ele.id
+                    deviceId: ele.deviceId
                 }
             })
         }
