@@ -8,7 +8,7 @@
                 <left-nav></left-nav>
             </div>
             <div class="bot-right">
-                <iframe src="http://10.1.54.211:8082/" ref='xmIframe' frameborder="0"></iframe>
+                <iframe src="http://localhost:8081/" ref='xmIframe' frameborder="0"></iframe>
             </div>
             <div class="bg" v-show='bgFlag'></div>
         </div>
